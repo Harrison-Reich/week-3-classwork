@@ -18,38 +18,45 @@
 
   <form>
     <p>
-      <label for="username">username</label>
-      <input type="text" name="username" id="username">
+      <label for="movieName">Movie Title</label>
+      <input type="text" name="movieName" id="movieName">
     </p>
     <p>
-      <label for="password">password</label>
-      <input type="password" name="password" id="password">
+      <label for="movieInfo">Movie Info</label>
+      <input type="text" name="movieInfo" id="movieInfo">
     </p>
-    <button id="signIn">Sign In</button>
+    <button id="submit">Submit</button>
+    <button id="reset">Reset</button>
   </form>
-  <div id="users"></div>
+  <div id="inputs"></div>
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   <script>
 
-    $('#signIn').click(event => {
+    $('#submit').click(event => {
       event.preventDefault()
 
       const userElem = $(`
         <div>
-          <h4>${$('#username').val()}</h4>
-          <h5>${$('#password').val()}</h5>
+          <h4>${$('#movieName').val()}</h4>
+          <h5>${$('#movieInfo').val()}</h5>
           <hr>
         </div>
       `)
 
-      $('#users').append(userElem)
+      $('#inputs').append(userElem)
 
-      $('#username').val('')
-      $('#password').val('')
+      $('#movieName').val('')
+      $('#movieInfo').val('')
+      
     })
-
+    
+    $('#reset').click(event => {
+      event.preventDefault()
+      $('#inputs').html = ("");
+    })
+    
     // let count = 0
 
     // $('#increment').click(() => {
