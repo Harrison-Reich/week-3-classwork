@@ -34,13 +34,18 @@
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   <script>
 
+      $(document).on('click', '.delete', function () {
+          this.parentNode.remove()
+        });
+
     $('#submit').click(event => {
       event.preventDefault()
 
       const userElem = $(`
-        <div>
+        <div id="submission">
           <h4>${$('#movieName').val()}</h4>
           <h5>${$('#movieInfo').val()}</h5>
+          <button class="delete">Delete</button>
           <hr>
         </div>
       `)
@@ -56,6 +61,20 @@
       event.preventDefault()
       $('#inputs').html("");
     })
+
+    // $('.delete').click (event => {
+    //   event.preventDefault()
+    //   $('#submission').parent().remove("")
+    // })
+
+    // $('.delete').click( event => {
+    //   event.preventDefault()
+    //   $('#submissions').html("");
+    // })
+    // $(document).on('click', '.delete', function () {
+    //   console.log('ping')
+    //   this.parentNode.remove()
+    // });
     
     // let count = 0
 
