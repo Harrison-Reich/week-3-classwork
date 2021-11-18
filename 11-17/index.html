@@ -31,17 +31,28 @@
 
           let result = null
 
-          for (let i = 0; i < poke.results.length; i++ ) {
+          for (let i = 0; i < poke.results.length; i++) {
             if (poke.results[i].name === title) {
-            result = poke.results[i]
+              result = poke.results[i]
             }
           }
-          
+
           if (result != null) {
             document.getElementById('pokemon').innerHTML = `
             <h1>${result.name}</h1>
-            <img src="${result.url}" alt="${result.name} Poster">
             `
+            axios.get(result.url)
+              .then(res => {
+                const poke1 = res.data
+                console.log(poke1)
+                console.log(poke1.sprites.front_default)
+
+                let userElem = document.createElement('div')
+                userElem.innerHTML = `<img src="${poke1.sprites.front_default}" alt="wobbuffet">
+                `
+                document.getElementById('pokemon').append(userElem)
+              })
+
           } else {
             document.getElementById('pokemon').innerHTML = `
               <h3>No Pokemon Found</h3>
