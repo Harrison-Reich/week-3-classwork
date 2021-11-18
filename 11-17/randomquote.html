@@ -54,7 +54,8 @@
             currentQuote.text = quote.quotes[0].text
             currentQuote.author = quote.quotes[0].author
             document.getElementById('quote').innerHTML = `
-            <h3>${quote.quotes[0].text}</h3>   
+            <h3>${quote.quotes[0].author}</h3>
+            <h6>${quote.quotes[0].text}</h6>   
           `
           }
         })
