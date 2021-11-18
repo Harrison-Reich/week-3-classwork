@@ -11,39 +11,44 @@
 <body>
   <form>
     <p>
-      <label for="title">Title</label>
-      <input type="text" name="title" id="title">
+      <label for="pokemonName">Search for Pokemon!</label>
+      <input type="text" name="pokemonName" id="pokemonName">
     </p>
-    <button id="search">Find Movie</button>
+    <button id="search">Find Pokemon</button>
   </form>
-  <div id="movie"></div>
+  <div id="pokemon"></div>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script>
 
     document.getElementById('search').addEventListener('click', event => {
       event.preventDefault()
-      const title = document.getElementById('title').value
+      const title = document.getElementById('pokemonName').value
 
-      axios.get(`http://www.omdbapi.com/?apikey=trilogy&t=${title}`)
+      axios.get(`https://pokeapi.co/api/v2/pokemon?limit=100&offset=200${pokemonName}`)
         .then(res => {
-          const movie = res.data
-          console.log(movie)
+          const poke = res.data
+          console.log(poke)
 
-          if (movie.Title) {
-            document.getElementById('movie').innerHTML = `
-            <h1>${movie.Title}</h1>
-            <h2>Directed by ${movie.Director}</h2>
-            <h3>Rotten Tomatoes: ${movie.Ratings[1].Value}</h3>
-            <img src="${movie.Poster}" alt="${movie.Title} Poster">
-            <h4>${movie.Plot}</h4>
+          let result = null
+
+          for (let i = 0; i < poke.results.length; i++ ) {
+            if (poke.results[i].name === title) {
+            result = poke.results[i]
+            }
+          }
+          
+          if (result != null) {
+            document.getElementById('pokemon').innerHTML = `
+            <h1>${result.name}</h1>
+            <img src="${result.url}" alt="${result.name} Poster">
             `
           } else {
-            document.getElementById('movie').innerHTML = `
-              <h3>No Movie Found</h3>
+            document.getElementById('pokemon').innerHTML = `
+              <h3>No Pokemon Found</h3>
             `
           }
 
-          document.getElementById('title').value = ''
+          document.getElementById('pokemonName').value = ''
         })
         .catch(err => console.log(err))
     })
@@ -54,3 +59,4 @@
 </html>
 
 <!-- HAVE CONNOR HELP WITH POKE API CLASS WORK -->
+<!-- CREATE A PAGE, CLICK A BUTTON AND SEE A QUOTE, SAVE QUOTE IN LIST THAT CAN BE DELETED -->
